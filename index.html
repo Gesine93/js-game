@@ -28,6 +28,29 @@
                 }
             }
         }
+
+        let humanScore = 0;
+        let computerScore = 0;
+        function playRound(humanSelection, computerSelection) {
+        if (humanSelection === computerSelection) {
+            return `Tie! You both chose ${humanSelection}!`;
+        } else if ((humanSelection === "rock" && computerSelection === "scissors") || 
+        (humanSelection === "paper" && computerSelection === "rock") ||
+        (humanSelection === "scissors" && computerSelection === "paper")) {
+            humanScore++;
+            return `You win! ${humanSelection} beats ${computerSelection}!`;
+        } else {
+            computerScore++;
+            return `You lose! ${computerSelection} beats ${humanSelection}!`;
+        }
+    }
+
+
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+
+        playRound(humanSelection, computerSelection);
+
     </script>
 </head>
 <body>
