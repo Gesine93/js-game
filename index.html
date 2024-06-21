@@ -16,6 +16,18 @@
                 return computerChoice = "paper"
             }
         }
+
+        function getHumanChoice() {
+            let validChoices = ['rock', 'paper', 'scissor'];
+            let valid = false;
+            while (valid == false) {
+                let choice = prompt('Rock, paper or scissor? ').toLowerCase();
+                if (validChoices.includes(choice)) {
+                    valid = true 
+                    return choice
+                }
+            }
+        }
     </script>
 </head>
 <body>
