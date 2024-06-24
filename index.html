@@ -4,7 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <div class="buttons">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div class="score">
+        <p class="scoreText"></p>
+        <p class="computer"></p>
+        <p class="human"></p>
+    </div>
     <script>
+        const rock = document.querySelector("#rock");
+        const paper = document.querySelector("#paper");
+        const scissors = document.querySelector("#scissors");
+        const scoreText = document.querySelector(".scoreText");
+        const computer = document.querySelector(".computer");
+        const human = document.querySelector(".human");
+        let computerScore = 0;
+        let humanScore = 0;
+
+        rock.addEventListener("click", playRound);
+        paper.addEventListener("click", playRound);
+        scissors.addEventListener("click", playRound);
+
         function getComputerChoice() {
             let number = Math.random();
             if (number <= 0.33) {
@@ -16,19 +49,29 @@
             }
         }
     
-        function getHumanChoice() {
-            let validChoices = ['rock', 'paper', 'scissors'];
-            let valid = false;
-            while (!valid) {
-                let choice = prompt('Rock, paper or scissors? ').toLowerCase();
-                if (validChoices.includes(choice)) {
-                    valid = true;
-                    return choice;
-                }
+        function playRound(event) {
+            if (computerScore >= 5 || humanScore >= 5) {
+                return;
+            }
+
+            let humanSelection = event.target.id;
+            let computerSelection = getComputerChoice();
+            let game = playGame(humanSelection, computerSelection);
+            humanScore = game.humanScore;
+            computerScore = game.computerScore;
+            scoreText.textContent = game.result;
+            human.textContent = `You have ${humanScore} points!`;
+            computer.textContent = `The computer has ${computerScore} points!`;
+
+            if (computerScore >= 5) {
+                /* wait than display a replay button and text */
+                scoreText.textContent = "The computer wins the game!";
+            } else if (humanScore >= 5) {
+                scoreText.textContent = "You win the game!";
             }
         }
     
-        function playRound(humanSelection, computerSelection, humanScore, computerScore) {
+        function playGame(humanSelection, computerSelection) {
             if (humanSelection === computerSelection) {
                 let result = `Tie! You both chose ${humanSelection}!`;
                 return { humanScore, computerScore, result };
@@ -44,33 +87,6 @@
                 return { humanScore, computerScore, result };
             }
         }
-    
-        function playGame() {
-            let round = 1;
-            let humanScore = 0;
-            let computerScore = 0;
-            while (round <= 5) {
-                let humanSelection = getHumanChoice();
-                let computerSelection = getComputerChoice();
-                let roundResult = playRound(humanSelection, computerSelection, humanScore, computerScore);
-                humanScore = roundResult.humanScore;
-                computerScore = roundResult.computerScore;
-                round++;
-            }
-            if (humanScore > computerScore) {
-                return 'You won the game!';
-            } else if (humanScore < computerScore) {
-                return 'You lost the game!';
-            } else {
-                return 'The game is a tie!';
-            }
-        }
-    
-        console.log(playGame());
     </script>
-    
-</head>
-<body>
-    
 </body>
 </html>
