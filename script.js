@@ -53,11 +53,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             /* wait than display a replay button and text */
             if (computerScore >= 5) {
-                finalText.textContent = "The computer wins the game!";
+                finalText = "The computer wins the game!";
             } else if (humanScore >= 5) {
-                finalText.textContent = "You win the game!";
+                finalText = "You win the game!";
             };
         };
+
+        openMenu(finalText);
     }
 
     function playGame(humanSelection, computerSelection) {
@@ -76,4 +78,22 @@ document.addEventListener('DOMContentLoaded', function() {
             return { humanScore, computerScore, result };
         }
     }
+
+    function openMenu(text) {
+        let menuDiv = document.createElement("div");
+        let finalText = document.createElement("p");
+        let menuButton = document.createElement("button");
+        let body = document.querySelector("body")
+        finalText.textContent = text;
+        menuDiv.setAttribute("id", "menu");
+        finalText.setAttribute("id", "menuText");
+        menuButton.setAttribute("id", "menuButton");
+        menuButton.textContent = "START NEW GAME";
+        menuDiv.appendChild(finalText);
+        menuDiv.appendChild(menuButton);
+        body.appendChild(menuDiv);
+        menuButton-addEventListener("click", newGame());
+    }
+
+    
 })
