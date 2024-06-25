@@ -11,32 +11,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href="./style.css" >
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <div class="displayScores">
+        <p class="player">
+            <span class="scoresText">player</span>
+            <span class="scoresText" id="humanScore">0</span>
+        </p>
+        <p class="computer">
+            <span class="scoresText">computer</span>
+            <span class="scoresText" id="computerScore">0</span>           
+        </p>
+    </div>
     <div class="buttons">
         <button id="rock">Rock</button>
         <button id="paper">Paper</button>
         <button id="scissors">Scissors</button>
     </div>
-    <div class="score">
+    <div class="text">
         <p class="scoreText"></p>
-        <p class="computer"></p>
-        <p class="human"></p>
     </div>
     <script>
         const rock = document.querySelector("#rock");
         const paper = document.querySelector("#paper");
         const scissors = document.querySelector("#scissors");
         const scoreText = document.querySelector(".scoreText");
-        const computer = document.querySelector(".computer");
-        const human = document.querySelector(".human");
+        const computer = document.querySelector("#computerScore");
+        const human = document.querySelector("#humanScore");
         let computerScore = 0;
         let humanScore = 0;
 
         rock.addEventListener("click", playRound);
         paper.addEventListener("click", playRound);
         scissors.addEventListener("click", playRound);
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms))
+        }
+
+        async function wait() {
+            await sleep(3000)
+        }
 
         function getComputerChoice() {
             let number = Math.random();
@@ -49,7 +66,7 @@
             }
         }
     
-        function playRound(event) {
+        async function playRound(event) {
             if (computerScore >= 5 || humanScore >= 5) {
                 return;
             }
@@ -60,13 +77,15 @@
             humanScore = game.humanScore;
             computerScore = game.computerScore;
             scoreText.textContent = game.result;
-            human.textContent = `You have ${humanScore} points!`;
-            computer.textContent = `The computer has ${computerScore} points!`;
+            human.textContent = humanScore;
+            computer.textContent = computerScore;
 
             if (computerScore >= 5) {
+                await wait();
                 /* wait than display a replay button and text */
                 scoreText.textContent = "The computer wins the game!";
             } else if (humanScore >= 5) {
+                await wait();
                 scoreText.textContent = "You win the game!";
             }
         }

@@ -1,0 +1,38 @@
+.displayScores {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+    gap: 20px;
+}
+
+.computer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+#rock,
+#paper,
+#scissors {
+    width: 120px;
+    padding: 5px 0;
+}
+
+.scoreText {
+    text-align: center;
+}
