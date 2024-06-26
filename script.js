@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
-    let computerScore = 0;
+document.addEventListener('DOMContentLoaded', function() {    let computerScore = 0;
     let humanScore = 0;
     let scoreText, computer, human;
 
@@ -45,9 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let finalText = "";
             if (computerScore >= 5) {
-                finalText = "The computer wins the game!";
+                finalText = "The computer won the game!";
             } else if (humanScore >= 5) {
-                finalText = "You win the game!";
+                finalText = "You won the game!";
             }
 
             openMenu(finalText);
@@ -56,16 +55,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function playGame(humanSelection, computerSelection) {
         if (humanSelection === computerSelection) {
-            let result = `Tie! You both chose ${humanSelection}!`;
+            let result = `Tie! You both chose ${capitalize(humanSelection)}!`;
             return { humanScore, computerScore, result };
         } else if ((humanSelection === "rock" && computerSelection === "scissors") || 
                 (humanSelection === "paper" && computerSelection === "rock") ||
                 (humanSelection === "scissors" && computerSelection === "paper")) {
-            let result = `You win! ${humanSelection} beats ${computerSelection}!`;
+            let result = `You win! ${capitalize(humanSelection)} beats ${computerSelection}!`;
             humanScore += 1;
             return { humanScore, computerScore, result };
         } else {
-            let result = `You lose! ${computerSelection} beats ${humanSelection}!`;
+            let result = `You lose! ${capitalize(computerSelection)} beats ${humanSelection}!`;
             computerScore += 1;
             return { humanScore, computerScore, result };
         }
@@ -194,6 +193,11 @@ document.addEventListener('DOMContentLoaded', function() {
         paperButton.addEventListener("click", playRound);
         scissorsButton.addEventListener("click", playRound);
     }
+                                                          
+    function capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
 
     // Call the newGame function to set up the initial game
     newGame();
