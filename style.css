@@ -14,7 +14,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    gap: 10px;
 }
 
 .displayScores {
@@ -67,6 +66,7 @@ body {
     text-align: center;
     font-size: 16px;
     font-weight: normal;
+    margin-top: 15px;
 }
 
 #menu {
